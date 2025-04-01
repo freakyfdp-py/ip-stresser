@@ -95,6 +95,7 @@ Say hello to **Super Python Stresser v3**—a powerhouse *Python IP Stresser* an
 ---
 
 ## 🛠️ Installation
+Simply download the python code and then run it with python3 toolname.py
 
 ### 📋 Requirements:
 - 🐍 **Python 3.x** (Pre-installed on Ubuntu, or download from [python.org](https://www.python.org/))
