@@ -829,9 +829,9 @@ def main():
                     methods = {
                         "1": minecraft_handshake, "2": minecraft_login,
                         "3": pubg_connect, "4": blackops6_spam, "5": cod_connect,
-                        "6": csgo_query, "7": rust_connect, "8": ark_spam,
-                        "9": fortnite_packet, "10": apex_connect, "11": valorant_spam,
-                        "12": gta_online_connect, "12": roblox_query
+                        "6": rust_connect, "7": ark_spam,
+                        "8": fortnite_packet, "9": apex_connect, "10": valorant_spam,
+                        "11": gta_online_connect, "12": roblox_query
                     }
                     methods[method](ip, port, duration)
                 else:
